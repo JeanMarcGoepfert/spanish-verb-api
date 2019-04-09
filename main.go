@@ -2,23 +2,15 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/JeanMarcGoepfert/spanish-api/data"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
 
-type Verb struct {
-	Base string `json:"base"`
-}
-
-var DB = map[string]Verb{
-	"hablar":   {Base: "hablar"},
-	"aprender": {Base: "aprender"},
-}
-
 func GetVerb(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	json.NewEncoder(w).Encode(DB[params["verb"]])
+	json.NewEncoder(w).Encode(data.DB[params["verb"]])
 }
 
 func main() {
