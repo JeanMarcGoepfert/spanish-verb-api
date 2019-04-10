@@ -8,9 +8,11 @@ import (
 	"net/http"
 )
 
+var DB = data.GetVerbs()
+
 func GetVerb(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	json.NewEncoder(w).Encode(data.DB[params["verb"]])
+	json.NewEncoder(w).Encode(DB[params["verb"]])
 }
 
 func main() {
@@ -21,5 +23,4 @@ func main() {
 	log.Println("Starting server on port 8080")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
-
 }
