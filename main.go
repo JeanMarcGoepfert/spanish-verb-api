@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/JeanMarcGoepfert/spanish-api/data"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"spanish-api/data"
 )
 
 var DB = data.GetVerbs()
