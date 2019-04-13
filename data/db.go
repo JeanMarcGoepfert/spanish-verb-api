@@ -51,10 +51,10 @@ type Usage struct {
 
 type Data map[string]*Usage
 
-var DB, err = readJSON()
+var DB, _ = readJSON()
 
-func GetVerbs() (data Data, err error) {
-	return DB, err
+func GetVerbs() (data Data) {
+	return DB
 }
 
 func readJSON() (data Data, err error) {
