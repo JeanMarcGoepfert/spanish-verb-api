@@ -51,7 +51,13 @@ type Usage struct {
 
 type Data map[string]*Usage
 
+var DB, err = readJSON()
+
 func GetVerbs() (data Data, err error) {
+	return DB, err
+}
+
+func readJSON() (data Data, err error) {
 	jsonFile, err := os.Open("data/verbs.json")
 	defer jsonFile.Close()
 
