@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"spanish-api/data"
+	"spanish-api/middleware"
 )
 
 var DB, err = data.GetVerbs()
@@ -23,6 +24,8 @@ func main() {
 	}
 
 	router := mux.NewRouter()
+
+	router.Use(middleware.LogRequest)
 
 	router.HandleFunc("/verb/{verb}", GetVerb).Methods("GET")
 
