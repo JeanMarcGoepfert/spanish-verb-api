@@ -12,6 +12,7 @@ func main() {
 	router := mux.NewRouter()
 
 	router.Use(middleware.LogRequest)
+	router.Use(middleware.SetJSON)
 
 	router.HandleFunc("/verb/{verb}", handlers.Get).Methods("GET")
 
