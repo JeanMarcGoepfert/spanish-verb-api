@@ -5,10 +5,11 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"os"
 	"spanish-api/data"
 )
 
-var DB = data.GetVerbs()
+var DB, err = data.GetVerbs()
 
 func GetVerb(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -16,6 +17,11 @@ func GetVerb(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	if err != nil {
+		log.Fatal("Unable to read data. Exiting.")
+		os.Exit(1)
+	}
+
 	router := mux.NewRouter()
 
 	router.HandleFunc("/verb/{verb}", GetVerb).Methods("GET")

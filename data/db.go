@@ -2,7 +2,6 @@ package data
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 )
@@ -52,17 +51,23 @@ type Usage struct {
 
 type Data map[string]*Usage
 
-func GetVerbs() Data {
+func GetVerbs() (data Data, err error) {
 	jsonFile, err := os.Open("data/verbs.json")
 	defer jsonFile.Close()
+
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
-	byteValue, _ := ioutil.ReadAll(jsonFile)
+	byteValue, err := ioutil.ReadAll(jsonFile)
+
+	if err != nil {
+		return nil, err
+	}
+
 	var result Data
 
 	json.Unmarshal([]byte(byteValue), &result)
 
-	return result
+	return result, nil
 }
