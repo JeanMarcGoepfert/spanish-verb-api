@@ -9,6 +9,6 @@ import (
 
 func GetVerb(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	verb := repo.GetVerbs()[params["verb"]]
+	verb := repo.GetVerb(params["verb"])
 	json.NewEncoder(w).Encode(verb)
 }

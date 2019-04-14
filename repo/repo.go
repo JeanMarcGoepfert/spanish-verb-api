@@ -10,6 +10,10 @@ func init() {
 	DB, _ = InitDB()
 }
 
-func GetVerbs() (data models.Verbs) {
+func GetVerbs() models.Verbs {
 	return DB
+}
+
+func GetVerb(verb string) *models.Verb {
+	return GetVerbs()[verb]
 }
