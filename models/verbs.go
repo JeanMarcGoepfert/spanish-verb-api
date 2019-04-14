@@ -1,10 +1,4 @@
-package data
-
-import (
-	"encoding/json"
-	"io/ioutil"
-	"os"
-)
+package models
 
 type Forms struct {
 	Form1s string `json:"form_1s"`
@@ -44,36 +38,9 @@ type Meta struct {
 	PastParticibleEnglish string `json:"pastparticiple_english"`
 }
 
-type Usage struct {
+type Verb struct {
 	Usage Moods `json:"useage"`
 	Meta  Meta  `json:"meta"`
 }
 
-type Data map[string]*Usage
-
-var DB, _ = readJSON()
-
-func GetVerbs() (data Data) {
-	return DB
-}
-
-func readJSON() (data Data, err error) {
-	jsonFile, err := os.Open("data/verbs.json")
-	defer jsonFile.Close()
-
-	if err != nil {
-		return nil, err
-	}
-
-	byteValue, err := ioutil.ReadAll(jsonFile)
-
-	if err != nil {
-		return nil, err
-	}
-
-	var result Data
-
-	json.Unmarshal([]byte(byteValue), &result)
-
-	return result, nil
-}
+type Verbs map[string]*Verb

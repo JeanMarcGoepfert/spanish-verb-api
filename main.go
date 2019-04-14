@@ -1,20 +1,17 @@
 package main
 
 import (
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"spanish-api/handlers"
 	"spanish-api/middleware"
+	"spanish-api/routes"
 )
 
 func main() {
-	router := mux.NewRouter()
+	router := routes.NewRouter()
 
 	router.Use(middleware.LogRequest)
 	router.Use(middleware.SetJSON)
-
-	router.HandleFunc("/verb/{verb}", handlers.Get).Methods("GET")
 
 	log.Println("Starting server on port 8080")
 

@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
-	"spanish-api/data"
+	"spanish-api/repo"
 )
 
-func Get(w http.ResponseWriter, r *http.Request) {
+func GetVerb(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	verb := data.GetVerbs()[params["verb"]]
+	verb := repo.GetVerbs()[params["verb"]]
 	json.NewEncoder(w).Encode(verb)
 }
