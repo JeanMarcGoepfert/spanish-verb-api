@@ -21,4 +21,10 @@ var routes = Routes{
 		"/verb/{verb}",
 		handlers.GetVerb,
 	},
+	Route{
+		"verb",
+		"GET",
+		"/verbs",
+		handlers.GetVerbs,
+	},
 }

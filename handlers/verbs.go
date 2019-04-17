@@ -19,3 +19,12 @@ func GetVerb(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(verb)
 }
+
+func GetVerbs(w http.ResponseWriter, r *http.Request) {
+	//TODO: Get these values out of r.URL.Query
+	pageNumber := 1
+	pageSize := 10
+	foo := repo.GetPaginatedVerbs(pageNumber, pageSize)
+
+	json.NewEncoder(w).Encode(foo)
+}

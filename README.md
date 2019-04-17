@@ -1,7 +1,5 @@
 ### Spanish Verb API
 
-WIP.
-
 ### Install dependencies
 
 `go get -u ./...`
@@ -9,4 +7,5 @@ WIP.
 ### Useage
 
 hit `/verb/:verb` to get information about a spanish verb
-
+hit `/verbs?page_number=x&page_number=y` to get paginated results (sorted
+alphabetically)
