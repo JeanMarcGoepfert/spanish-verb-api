@@ -6,6 +6,14 @@
 
 ### Useage
 
-hit `/verb/:verb` to get information about a spanish verb
-hit `/verbs?page_number=x&page_number=y` to get paginated results (sorted
-alphabetically)
+Get information about a specific spanish verb
+```
+/verb/:verb
+```
+
+
+Get paginated list of verbs (sorted alphabetically)
+```
+/verbs?page_number=x&page_number=y
+```
+
