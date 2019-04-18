@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
+	"spanish-api/handlers/utils"
 	"spanish-api/lib"
 	"spanish-api/repo"
+	"strconv"
 )
 
 func GetVerb(w http.ResponseWriter, r *http.Request) {
@@ -21,10 +23,18 @@ func GetVerb(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetVerbs(w http.ResponseWriter, r *http.Request) {
-	//TODO: Get these values out of r.URL.Query
-	pageNumber := 1
-	pageSize := 10
-	foo := repo.GetPaginatedVerbs(pageNumber, pageSize)
+	//TODO: Add pagination meta to response
+	params := utils.GetQueryParams(r, []string{"page_number", "page_size"})
 
-	json.NewEncoder(w).Encode(foo)
+	pageNumber, err := strconv.Atoi(params["page_number"])
+	if err != nil {
+		pageNumber = 1
+	}
+
+	pageSize, err := strconv.Atoi(params["page_size"])
+	if err != nil {
+		pageSize = 10
+	}
+
+	json.NewEncoder(w).Encode(repo.GetPaginatedVerbs(pageNumber, pageSize))
 }
