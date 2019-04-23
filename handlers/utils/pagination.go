@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"log"
 	"net/http"
 )
 
@@ -13,8 +12,6 @@ func GetQueryParams(r *http.Request, params []string) QueryParams {
 	for _, key := range params {
 		result[key] = r.URL.Query().Get(key)
 	}
-
-	log.Println(result)
 
 	return result
 }

@@ -27,15 +27,18 @@ func GetVerb(verb string) *models.Verb {
 
 func GetPaginatedVerbs(pageNumber int, pageSize int) []models.Meta {
 	//TODO: move paginate into lib
-	//TODO: handle negative numbers
-	//TODO: handle last page better (empty array if out of range)
 
-	max := (len(VerbList) - 1)
-	start := lib.Min(max-1, ((pageNumber - 1) * pageSize))
-	end := lib.Min(start+pageSize, len(VerbList)-1)
+	result := []models.Meta{}
+	max := len(VerbList)
+	start := (pageNumber - 1) * pageSize
+
+	if start >= max || start < 0 {
+		return result
+	}
+
+	end := lib.Min(start+pageSize, max-1)
+
 	keys := VerbList[start:end]
-
-	var result []models.Meta
 
 	for _, key := range keys {
 		v := GetVerb(key).Meta
