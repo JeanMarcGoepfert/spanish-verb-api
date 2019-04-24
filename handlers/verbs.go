@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"spanish-api/handlers/utils"
 	"spanish-api/lib"
+	"spanish-api/models"
 	"spanish-api/repo"
 	"strconv"
 )
@@ -23,7 +24,6 @@ func GetVerb(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetVerbs(w http.ResponseWriter, r *http.Request) {
-	//TODO: Add pagination meta to response
 	params := utils.GetQueryParams(r, []string{"page_number", "page_size"})
 
 	pageNumber, err := strconv.Atoi(params["page_number"])
@@ -36,5 +36,19 @@ func GetVerbs(w http.ResponseWriter, r *http.Request) {
 		pageSize = 10
 	}
 
-	json.NewEncoder(w).Encode(repo.GetPaginatedVerbs(pageNumber, pageSize))
+	type Response struct {
+		Meta   models.PaginationMeta `json:"meta"`
+		Result []models.Meta         `json:"result"`
+	}
+
+	response := Response{
+		Meta: models.PaginationMeta{
+			Total:      repo.GetVerbCount(),
+			PageNumber: pageNumber,
+			PageSize:   pageSize,
+		},
+		Result: repo.GetPaginatedVerbs(pageNumber, pageSize),
+	}
+
+	json.NewEncoder(w).Encode(response)
 }

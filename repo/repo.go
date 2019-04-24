@@ -25,10 +25,13 @@ func GetVerb(verb string) *models.Verb {
 	return GetVerbs()[verb]
 }
 
-func GetPaginatedVerbs(pageNumber int, pageSize int) []models.Meta {
-	//TODO: move paginate into lib
+func GetVerbCount() int {
+	return len(VerbList)
+}
 
+func GetPaginatedVerbs(pageNumber int, pageSize int) []models.Meta {
 	result := []models.Meta{}
+
 	max := len(VerbList)
 	start := (pageNumber - 1) * pageSize
 
