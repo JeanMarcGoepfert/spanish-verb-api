@@ -22,7 +22,7 @@ var routes = Routes{
 		handlers.GetVerb,
 	},
 	Route{
-		"verb",
+		"verbs",
 		"GET",
 		"/verbs",
 		handlers.GetVerbs,

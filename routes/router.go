@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/gorilla/mux"
+	"spanish-api/handlers"
 )
 
 func NewRouter() *mux.Router {
@@ -15,6 +16,8 @@ func NewRouter() *mux.Router {
 			Name(route.Name).
 			Handler(route.HandlerFunc)
 	}
+
+	router.PathPrefix("/").HandlerFunc(handlers.CatchAll)
 
 	return router
 }

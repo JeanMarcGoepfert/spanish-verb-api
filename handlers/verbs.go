@@ -5,7 +5,6 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	"spanish-api/handlers/utils"
-	"spanish-api/lib"
 	"spanish-api/models"
 	"spanish-api/repo"
 	"strconv"
@@ -16,7 +15,7 @@ func GetVerb(w http.ResponseWriter, r *http.Request) {
 	verb := repo.GetVerb(params["verb"])
 
 	if verb == nil {
-		lib.SetError(w, http.StatusNotFound, "Verb not found")
+		utils.SetError(w, http.StatusNotFound, "Verb not found")
 		return
 	}
 

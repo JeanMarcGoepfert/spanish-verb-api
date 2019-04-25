@@ -2,8 +2,8 @@ package repo
 
 import (
 	"sort"
-	"spanish-api/lib"
 	"spanish-api/models"
+	"spanish-api/utils"
 )
 
 var DB models.Verbs
@@ -39,7 +39,7 @@ func GetPaginatedVerbs(pageNumber int, pageSize int) []models.Meta {
 		return result
 	}
 
-	end := lib.Min(start+pageSize, max-1)
+	end := utils.Min(start+pageSize, max-1)
 
 	keys := VerbList[start:end]
 
